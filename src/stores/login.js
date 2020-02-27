@@ -6,38 +6,36 @@ function account() {
   const { subscribe, set, update } = writable(false);
 
   async function getMe() {
-    try {
-      const req = await fetch(
-        "https://bug-tracker-api.herokuapp.com/api/v1/auth/me",
-        {
-          method: "GET",
-          credentials: "include"
-        }
-      );
+    // try {
+    const req = await fetch("/api/v1/auth/me", {
+      method: "GET",
+      credentials: "include"
+    });
 
-      const res = await req.json();
+    const res = await req.json();
 
-      if (res.success) {
-        set(true);
-        push("/projects");
-      }
-    } catch (err) {
-      set(false);
+    if (res.success) {
+      set(true);
+      push("/projects");
+    } else {
+      M.toast({ html: `${res.error}`, classes: "red" });
       push("/login");
+      set(false);
     }
+    // } catch (err) {
+    //   set(false);
+    //   push("/login");
+    // }
   }
 
   async function login(body) {
     try {
-      const req = await fetch(
-        "https://bug-tracker-api.herokuapp.com/api/v1/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify(body)
-        }
-      );
+      const req = await fetch("/api/v1/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(body)
+      });
 
       const res = await req.json();
 
@@ -54,13 +52,10 @@ function account() {
 
   async function logout() {
     try {
-      const req = await fetch(
-        "https://bug-tracker-api.herokuapp.com/api/v1/auth/logout",
-        {
-          method: "GET",
-          credentials: "include"
-        }
-      );
+      const req = await fetch("/api/v1/auth/logout", {
+        method: "GET",
+        credentials: "include"
+      });
 
       const res = await req.json();
 
@@ -78,15 +73,12 @@ function account() {
 
   async function createUser(userBody) {
     try {
-      const req = await fetch(
-        "https://bug-tracker-api.herokuapp.com/api/v1/auth/register",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userBody)
-        }
-      );
+      const req = await fetch("/api/v1/auth/register", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userBody)
+      });
 
       const res = await req.json();
 

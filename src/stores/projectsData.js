@@ -5,13 +5,10 @@ function projectsFunc() {
 
   async function getProjects() {
     try {
-      const req = await fetch(
-        "https://bug-tracker-api.herokuapp.com/api/v1/projects/getProjects",
-        {
-          method: "GET",
-          credentials: "include"
-        }
-      );
+      const req = await fetch("/api/v1/projects/getProjects", {
+        method: "GET",
+        credentials: "include"
+      });
 
       const res = await req.json();
 
@@ -27,13 +24,10 @@ function projectsFunc() {
   }
 
   async function getProjectInfo() {
-    const req = await fetch(
-      "https://bug-tracker-api.herokuapp.com/api/v1/projects/getProject",
-      {
-        method: "GET",
-        credentials: "include"
-      }
-    );
+    const req = await fetch("/api/v1/projects/getProject", {
+      method: "GET",
+      credentials: "include"
+    });
 
     const res = await req.json();
 
@@ -42,13 +36,10 @@ function projectsFunc() {
 
   async function setProject(id) {
     try {
-      const req = await fetch(
-        `https://bug-tracker-api.herokuapp.com/api/v1/projects/${id}`,
-        {
-          method: "GET",
-          credentials: "include"
-        }
-      );
+      const req = await fetch(`/api/v1/projects/${id}`, {
+        method: "GET",
+        credentials: "include"
+      });
 
       const res = await req.json();
 
@@ -59,25 +50,19 @@ function projectsFunc() {
   }
 
   async function deleteProject(id, index) {
-    const req = await fetch(
-      `https://bug-tracker-api.herokuapp.com/api/v1/projects/${id}`,
-      {
-        method: "GET",
-        credentials: "include"
-      }
-    );
+    const req = await fetch(`/api/v1/projects/${id}`, {
+      method: "GET",
+      credentials: "include"
+    });
 
     const res = await req.json();
 
     if (!res.success) return console.log(res);
 
-    const deleteReq = await fetch(
-      "https://bug-tracker-api.herokuapp.com/api/v1/projects",
-      {
-        method: "DELETE",
-        credentials: "include"
-      }
-    );
+    const deleteReq = await fetch("/api/v1/projects", {
+      method: "DELETE",
+      credentials: "include"
+    });
 
     const deleteRes = await deleteReq.json();
 
@@ -91,15 +76,12 @@ function projectsFunc() {
 
   async function newProject(newProjectBody) {
     try {
-      const req = await fetch(
-        "https://bug-tracker-api.herokuapp.com/api/v1/projects",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newProjectBody)
-        }
-      );
+      const req = await fetch("/api/v1/projects", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProjectBody)
+      });
 
       const res = await req.json();
 
@@ -110,15 +92,12 @@ function projectsFunc() {
   }
 
   async function editProject(project, index) {
-    const req = await fetch(
-      "https://bug-tracker-api.herokuapp.com/api/v1/projects",
-      {
-        method: "PUT",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(project)
-      }
-    );
+    const req = await fetch("/api/v1/projects", {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(project)
+    });
 
     const res = await req.json();
 
